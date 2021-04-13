@@ -59,7 +59,7 @@ public class TextEditor {
         if (i >= j || i < 0 || j >= text.length()) {
             throw new IllegalArgumentException();
         }
-        if (outOfUndo == true) {
+        if (outOfUndo) {
             redo.clear();
         }
         String swapped = "";
