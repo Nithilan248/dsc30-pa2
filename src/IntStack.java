@@ -20,6 +20,7 @@ public class IntStack {
     private double shrinkFactor;
     private int initialCap;
 
+
     public IntStack(int capacity, double loadF, double shrinkF) {
         /**
          * Initializes a new stack of Integers
@@ -35,6 +36,7 @@ public class IntStack {
         shrinkFactor = shrinkF;
         data = new int[capacity];
         initialCap = capacity;
+        nElems = 0;
 
 
     }
@@ -64,7 +66,10 @@ public class IntStack {
          * Checks if the boolean is empty
          * @return ture if there is nothing in the stack, false otherwise
          */
-        return nElems == 0;
+        if (nElems == 0) {
+            return true;
+        }
+        return false;
     }
 
     public void clear() {
@@ -107,15 +112,15 @@ public class IntStack {
          * Adds the element to the stack
          * @param element what to put in the stack
          */
-        if (nElems / data.length >= loadFactor) {
-            int[] nData = new int[data.length * FACTR];
+        if ((double) (nElems / capacity()) >= loadFactor) {
+            int[] nData = new int[capacity() * FACTR];
             for (int i = 0; i < data.length; i++) {
                 nData[i] = data[i];
             }
             data = nData;
         }
         data[nElems] = element;
-        nElems++;
+        nElems = nElems + 1;
     }
 
     public int pop() {
@@ -126,9 +131,9 @@ public class IntStack {
         if (isEmpty()) {
             throw new EmptyStackException();
         }
-        if (nElems / data.length <= shrinkFactor) {
-            int[] nData = new int[data.length / FACTR];
-            for (int i = 0; i < data.length; i++) {
+        if ((double) (size() / capacity()) <= shrinkFactor) {
+            int[] nData = new int[capacity() / FACTR];
+            for (int i = 0; i < nData.length; i++) {
                 nData[i] = data[i];
             }
             data = nData;

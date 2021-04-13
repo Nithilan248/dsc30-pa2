@@ -2,25 +2,24 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-class IntStackTest {
-    private IntStack stack;
+public class IntStackTest {
+    private IntStack stack1 = new IntStack(8);
+    private IntStack stack2 = new IntStack(9);
 
     @Test
     public void testConstructor() {
-        stack = new IntStack(8);
         int [] expected = new int[8];
-        double lf = .75;
-        double sf = .25;
-        assertEquals(expected.length , stack.capacity());
-        assertEquals(0,stack.size());
-
+        assertEquals(expected.length , stack1.capacity());
+        assertEquals(0,stack1.size());
 
     }
 
-//    @Test
-//    public void testIsEmpty() {
-//
-//    }
+    @Test
+    public void testIsEmpty() {
+        boolean expected =  true;
+        boolean actual = stack1.isEmpty();
+        assertEquals(expected, actual);
+    }
 //
 //    @Test
 //    public void testClear() {
