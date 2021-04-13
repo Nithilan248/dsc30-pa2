@@ -28,7 +28,7 @@ public class IntStack {
          * @param shrinkF the shrink factor
          * @throws IllegalArgumentException when the requirements for the parameter arent met
          */
-        if (capacity >= 5 || (.67 <= loadF && loadF <= 1) || (0 < shrinkF && shrinkF <= .33)) {
+        if (capacity < 5 || (.67 > loadF && loadF > 1) || (0 >= shrinkF && shrinkF > .33)) {
             throw new IllegalArgumentException();
         }
         loadFactor = loadF;
