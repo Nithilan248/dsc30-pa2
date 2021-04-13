@@ -77,6 +77,7 @@ public class IntStack {
          * clears the elements in the stack
          */
         data = new int[initialCap];
+        nElems = 0;
     }
 
     public int size() {
@@ -139,7 +140,9 @@ public class IntStack {
             data = nData;
         }
         nElems--;
-        return data[nElems];
+        int popped = data[nElems];
+        data[nElems] = 0;
+        return popped;
     }
 
     public void multiPush(int[] elements) {
@@ -166,10 +169,10 @@ public class IntStack {
             throw new IllegalArgumentException();
         }
         int[] popped;
-        if (amount > nElems) {
-            popped = new int[nElems];
+        if (amount > size()) {
+            popped = new int[size()];
             int count = 0;
-            while (nElems != 0) {
+            while (size() != 0) {
                 popped[count] = pop();
                 count++;
             }

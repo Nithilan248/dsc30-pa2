@@ -73,6 +73,7 @@ public class StringStack {
          * clears the elements in the stack
          */
         data = new String[initialCap];
+        nElems = 0;
     }
 
     public int size() {
@@ -135,7 +136,9 @@ public class StringStack {
             data = nData;
         }
         nElems--;
-        return data[nElems];
+        String popped = data[nElems];
+        data[nElems] = "";
+        return popped;
     }
 
     public void multiPush(String[] elements) {

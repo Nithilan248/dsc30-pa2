@@ -10,10 +10,6 @@
  */
 public class PrefixNotation {
 
-    public static void main(String[] args) {
-//        String nums = "+9*26";
-//        System.out.println(evaluate(nums));
-    }
 
     public static int evaluate(String notation) {
         /**

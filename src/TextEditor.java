@@ -9,7 +9,7 @@ import java.util.EmptyStackException;
  * A text editor with a redo and undo function
  *
  * @author Nithilan Muruganandham
- * @since TODO
+ * @since ${04/12/2021}
  */
 public class TextEditor {
 
@@ -20,6 +20,7 @@ public class TextEditor {
     private IntStack redo;
     private StringStack insertedText;
     private boolean outOfUndo;
+
 
     public TextEditor() {
         /**
@@ -58,7 +59,7 @@ public class TextEditor {
         if (i >= j || i < 0 || j >= text.length()) {
             throw new IllegalArgumentException();
         }
-        if (outOfUndo) {
+        if (outOfUndo == true) {
             redo.clear();
         }
         String swapped = "";
@@ -89,7 +90,7 @@ public class TextEditor {
         if (input == null) {
             throw new NullPointerException();
         }
-        if (i < 0 || i >= text.length()) {
+        if (i < 0 || i > text.length()) {
             throw new IllegalArgumentException();
         }
         if (outOfUndo) {
@@ -107,7 +108,7 @@ public class TextEditor {
          * @throw IllegalArgumentException if i or j is out of bounds or i isnt smaller than j
          */
         String x = "";
-        if (i >= j || i < 0 || j >= text.length()) {
+        if (i >= j || i < 0 || j > text.length()) {
             throw new IllegalArgumentException();
         }
         if (outOfUndo) {
@@ -133,6 +134,7 @@ public class TextEditor {
         } catch (EmptyStackException e) {
             return false;
         }
+        System.out.println(history[0]);
         outOfUndo = false;
         int[] forRedo = {history[2], history[1], history[0]};
         redo.multiPush(forRedo);
@@ -160,9 +162,8 @@ public class TextEditor {
          * @return false if performing a redo fails, true otherwise
          */
         int[] history;
-        try {
-            history = undo.multiPop(3);
-        } catch (EmptyStackException e) {
+        history = redo.multiPop(3);
+        if (history.length == 0) {
             return false;
         }
         outOfUndo = false;
