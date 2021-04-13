@@ -25,11 +25,11 @@ public class IntStack {
         /**
          * Initializes a new stack of Integers
          * @param capacity the capacity of the stack
-         * @param loadf the load factor
+         * @param loadF the load factor
          * @param shrinkF the shrink factor
          * @throws IllegalArgumentException when the requirements for the parameter arent met
          */
-        if (capacity < 5 || (.67 > loadF && loadF > 1) || (0 >= shrinkF && shrinkF > .33)) {
+        if (capacity < 5 || (.67 > loadF || loadF > 1) || (0 >= shrinkF || shrinkF > .33)) {
             throw new IllegalArgumentException();
         }
         loadFactor = loadF;
@@ -45,7 +45,7 @@ public class IntStack {
         /**
          * Initializes a new stack of Integers
          * @param capacity the capacity of the stack
-         * @param loadf the load factor
+         * @param loadF the load factor
          * @throws IllegalArgumentException when the requirements for the parameter arent met
          */
         this(capacity, loadF, .25);
@@ -112,7 +112,7 @@ public class IntStack {
          * Adds the element to the stack
          * @param element what to put in the stack
          */
-        if ((double) (nElems / capacity()) >= loadFactor) {
+        if (((double) (size()) / (double) (capacity())) >= loadFactor) {
             int[] nData = new int[capacity() * FACTR];
             for (int i = 0; i < data.length; i++) {
                 nData[i] = data[i];
@@ -131,7 +131,7 @@ public class IntStack {
         if (isEmpty()) {
             throw new EmptyStackException();
         }
-        if ((double) (size() / capacity()) <= shrinkFactor) {
+        if ((double) (size()) / (double) (capacity()) <= shrinkFactor) {
             int[] nData = new int[capacity() / FACTR];
             for (int i = 0; i < nData.length; i++) {
                 nData[i] = data[i];
@@ -162,6 +162,9 @@ public class IntStack {
          * @param amount the number of elements popped
          * @throws IllegalArgumentException when amount isn't positive
          */
+        if (amount <= 0) {
+            throw new IllegalArgumentException();
+        }
         int[] popped;
         if (amount > nElems) {
             popped = new int[nElems];

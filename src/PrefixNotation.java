@@ -11,8 +11,8 @@
 public class PrefixNotation {
 
     public static void main(String[] args) {
-        String nums = "+9*26";
-        System.out.println(evaluate(nums));
+//        String nums = "+9*26";
+//        System.out.println(evaluate(nums));
     }
 
     public static int evaluate(String notation) {
@@ -21,11 +21,11 @@ public class PrefixNotation {
          * @param notation a string in prefix notation
          * @return the vale of the expression given in prefix notation
          */
-        IntStack ints= new IntStack(100);
-        for (int i = notation.length() - 1; i >=0; i--) {
+        IntStack ints = new IntStack(100);
+        for (int i = notation.length() - 1; i >= 0; i--) {
             char c = notation.charAt(i);
-            if (c >= 48 && c <= 57){
-                ints.push((int)(c-48));
+            if (c >= 48 && c <= 57) {
+                ints.push((int) (c - 48));
             } else {
                 int num1 = ints.pop();
                 int num2 = ints.pop();
@@ -42,7 +42,8 @@ public class PrefixNotation {
                     case '*':
                         ints.push(num1 * num2);
                         break;
-
+                    default:
+                        break;
                 }
             }
 
